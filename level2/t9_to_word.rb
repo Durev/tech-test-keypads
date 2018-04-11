@@ -1,5 +1,7 @@
 class T9ToWord
 
+  attr_reader :next_key_count
+
   KEY_PAD = {
     2 => { 1 => "a", 2 => "b", 3 => "c" },
     3 => { 1 => "d", 2 => "e", 3 => "f" },
@@ -13,7 +15,9 @@ class T9ToWord
   }
 
   def initialize(taps_sequence)
-    @taps_sequence = taps_sequence.split('').collect{ |key_tap| key_tap.to_i }
+    taps_array = taps_sequence.split('')
+    @next_key_count = taps_array.count{ |key| key == "1" }
+    @taps_sequence = taps_array.collect{ |key| key.to_i }.reject{ |key| key == 1}
   end
 
   def possible_letters
@@ -26,23 +30,16 @@ class T9ToWord
 
   private
 
-    def combine_arrays_real(arrays)
-      return arrays.first if arrays.size == 1
-      first = arrays.shift
-      first.product( combine_arrays(arrays) ).collect {|x| x.join}
-    end
-
     def combine_arrays(arrays)
       return arrays.first if arrays.size == 1
       first_tap = arrays.shift
-      p first_tap
-      p "----"
       first_tap
         .product(combine_arrays(arrays))
         .collect{ |arrays_products| arrays_products.join }
     end
-
 end
+
+
 
 p T9ToWord.new(STDIN.read.chomp).possible_combinations
 
