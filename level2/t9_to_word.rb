@@ -1,6 +1,6 @@
-class T9ToWord
+require 'net/http'
 
-  attr_reader :next_key_count
+class T9ToWord
 
   KEY_PAD = {
     2 => { 1 => "a", 2 => "b", 3 => "c" },
@@ -28,6 +28,10 @@ class T9ToWord
     combine_arrays(possible_letters)
   end
 
+  def possible_choices(matching_length_words = WordList.new.words_length(@taps_sequence.size))
+    possible_combinations & matching_length_words
+  end
+
   private
 
     def combine_arrays(arrays)
@@ -39,7 +43,17 @@ class T9ToWord
     end
 end
 
+class WordList
 
+  def initialize(url = "http://norvig.com/ngrams/word.list")
+    uri = URI(url)
+    response = Net::HTTP.get(uri)
+    @list = response.split("\n")
+  end
 
-p T9ToWord.new(STDIN.read.chomp).possible_combinations
+  def words_length(n)
+    @list.select{ |word| word.length == n }
+  end
+end
 
+p T9ToWord.new(STDIN.read.chomp).possible_choices
