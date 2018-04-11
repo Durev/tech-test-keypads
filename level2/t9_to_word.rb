@@ -1,4 +1,4 @@
-require 'net/http'
+require_relative 'word_list'
 
 class T9ToWord
 
@@ -32,6 +32,10 @@ class T9ToWord
     possible_combinations & matching_length_words
   end
 
+  def word
+    possible_choices[@next_key_count]
+  end
+
   private
 
     def combine_arrays(arrays)
@@ -43,17 +47,4 @@ class T9ToWord
     end
 end
 
-class WordList
-
-  def initialize(url = "http://norvig.com/ngrams/word.list")
-    uri = URI(url)
-    response = Net::HTTP.get(uri)
-    @list = response.split("\n")
-  end
-
-  def words_length(n)
-    @list.select{ |word| word.length == n }
-  end
-end
-
-p T9ToWord.new(STDIN.read.chomp).possible_choices
+puts T9ToWord.new(STDIN.read.chomp).word
