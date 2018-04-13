@@ -8,15 +8,17 @@ class WordList
     @words_arr = File.open(@words_list_file).read.split("\n")
   end
 
-  def import_words_list(url = "http://norvig.com/ngrams/word.list")
-    uri = URI(url)
-    response = Net::HTTP.get(uri)
-    File.open(@words_list_file,"w") do |f|
-      f.write(response)
-    end
-  end
-
-  def words_length(n)
+  def length_filtered_list(n)
     @words_arr.select{ |word| word.length == n }
   end
+
+  private
+
+    def import_words_list(url = "http://norvig.com/ngrams/word.list")
+      uri = URI(url)
+      response = Net::HTTP.get(uri)
+      File.open(@words_list_file,"w") do |f|
+        f.write(response)
+      end
+    end
 end
