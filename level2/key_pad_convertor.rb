@@ -1,4 +1,4 @@
-class KeyPad
+class KeyPadConvertor
 
   KEY_PAD = {
     2 => ["a", "b", "c"],

@@ -1,5 +1,5 @@
 require_relative 'word_list'
-require_relative 'key_pad'
+require_relative 'key_pad_convertor'
 
 class T9
 
@@ -21,7 +21,7 @@ class T9
   private
 
     def possible_letters
-      @taps_sequence.collect{ |key_tap| KeyPad.to_letters(key_tap) }
+      @taps_sequence.collect{ |key_tap| KeyPadConvertor.to_letters(key_tap) }
     end
 
     def combine_arrays(arrays)
