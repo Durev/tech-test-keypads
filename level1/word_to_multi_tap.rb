@@ -1,3 +1,3 @@
-require_relative 'taps_count'
+require_relative 'word'
 
-puts TapsCount.new(Word.new(STDIN.read.chomp)).sequence
+puts Word.new(STDIN.read.chomp).digits_sequence

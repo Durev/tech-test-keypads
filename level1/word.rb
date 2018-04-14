@@ -1,16 +1,12 @@
+require_relative 'key_pad_convertor'
+
 class Word
 
   def initialize(word)
-    @word = word
+    @word = word.split('')
   end
 
-  def get_taps(letter)
-    TapsCount::KEY_PAD.each do |key, hash|
-      return [key, hash.key(letter)] if hash.key(letter)
-    end
-  end
-
-  def taps_count
-    @word.split('').collect{ |letter| get_taps(letter) }
+  def digits_sequence
+    @word.map{ |letter| KeyPadConvertor.to_digits(letter) }.join
   end
 end
