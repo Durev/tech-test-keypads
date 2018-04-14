@@ -19,5 +19,4 @@ class KeyPadConvertor
   def self.to_letter(digits_chunk)
     KEY_PAD.invert[digits_chunk]
   end
-
 end

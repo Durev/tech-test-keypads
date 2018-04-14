@@ -8,7 +8,7 @@ class DigitsSequence
 
   def word
     digits_chunks
-      .collect{ |digits_chunk| KeyPadConvertor.to_letter(digits_chunk) }
+      .map{ |digits_chunk| KeyPadConvertor.to_letter(digits_chunk) }
       .join
   end
 
@@ -17,6 +17,6 @@ class DigitsSequence
     def digits_chunks
       @digits_sequence
         .scan(/((\d)\2*)/)
-        .collect{ |chunk| chunk.first }
+        .map{ |chunk| chunk.first }
     end
 end
