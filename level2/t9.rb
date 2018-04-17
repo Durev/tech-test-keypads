@@ -11,28 +11,10 @@ class T9
   end
 
   def word
-    possible_choices[@next_key_count]
-  end
-
-  def possible_choices(matching_length_words = WordList.new.length_filtered_list(@word_length))
-    possible_combinations & matching_length_words
+    WordList.new.possible_words(word_length, taps_sequence)[next_key_count]
   end
 
   private
 
-    def possible_letters
-      @taps_sequence.collect{ |key_tap| KeyPadConvertor.to_letters(key_tap) }
-    end
-
-    def combine_arrays(arrays)
-      return arrays.first if arrays.size == 1
-      first_tap = arrays.shift
-      first_tap
-        .product(combine_arrays(arrays))
-        .collect{ |arrays_products| arrays_products.join }
-    end
-
-    def possible_combinations
-      combine_arrays(possible_letters)
-    end
+    attr_reader :word_length, :taps_sequence, :next_key_count
 end

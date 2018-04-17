@@ -6,24 +6,22 @@ class Word
 
   def initialize(word)
     @word = word
-    @letters = word.split('')
   end
 
   def t9_sequence
-    pressed_keys + next_key_taps
+    pressed_keys.join + next_key_taps
+  end
+
+  def pressed_keys
+    KeyPadConvertor.word_to_keys(word)
   end
 
   private
 
-    def pressed_keys
-      @letters
-        .collect{ |letter| KeyPadConvertor.to_key(letter) }
-        .join
-    end
+    attr_reader :word
 
     def next_key_taps
-      next_key_taps_count = T9.new(pressed_keys).possible_choices.index(@word)
+      next_key_taps_count = WordList.new.possible_words(word.length, pressed_keys).index(word)
       "1" * next_key_taps_count
     end
-
 end

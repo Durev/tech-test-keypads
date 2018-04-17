@@ -11,13 +11,15 @@ class KeyPadConvertor
     9 => ["w", "x", "y", "z"]
   }
 
-  # attr_reader :key, :letter
-
-  def self.to_letters(key)
+  def self.key_to_letter(key)
     KEY_PAD[key]
   end
 
-  def self.to_key(letter)
-    KEY_PAD.select{ |key, letters| letters.include?(letter) }.keys.join
+  def self.letter_to_key(letter)
+    KEY_PAD.select{ |key, letters| letters.include?(letter) }.keys.join.to_i
+  end
+
+  def self.word_to_keys(word)
+    word.split('').collect{ |letter| letter_to_key(letter) }
   end
 end
