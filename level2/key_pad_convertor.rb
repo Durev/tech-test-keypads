@@ -20,6 +20,6 @@ class KeyPadConvertor
   end
 
   def self.word_to_keys(word)
-    word.split('').collect{ |letter| letter_to_key(letter) }
+    word.split('').map{ |letter| letter_to_key(letter) }
   end
 end

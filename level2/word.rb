@@ -21,7 +21,14 @@ class Word
     attr_reader :word
 
     def next_key_taps
-      next_key_taps_count = WordList.new.possible_words(word.length, pressed_keys).index(word)
       "1" * next_key_taps_count
+    end
+
+    def next_key_taps_count
+      word_list.possible_words(word.length, pressed_keys).index(word)
+    end
+
+    def word_list
+      WordList.new
     end
 end

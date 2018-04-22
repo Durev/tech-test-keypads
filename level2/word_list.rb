@@ -1,4 +1,5 @@
 require 'net/http'
+require_relative 'key_pad_convertor'
 
 class WordList
 
