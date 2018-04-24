@@ -17,6 +17,10 @@ class WordList
     length_filtered_list(n).select{ |word| KeyPadConvertor.word_to_keys(word) == taps_sequence }
   end
 
+  def most_common_words(n)
+    most_used_words_sorted_list.first(n)
+  end
+
   private
 
     attr_reader :words_list_path, :most_used_words_list_path

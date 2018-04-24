@@ -1,8 +1,7 @@
 require_relative 'word_list'
 require_relative 'key_pad_convertor'
-require_relative 't9'
 
-class Word
+class WordLevel3
 
   def initialize(word)
     @word = word

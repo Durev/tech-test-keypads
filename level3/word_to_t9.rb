@@ -1,3 +1,3 @@
-require_relative 'word'
+require_relative 'word_level3'
 
-puts Word.new(STDIN.read.chomp).t9_sequence
+puts WordLevel3.new(STDIN.read.chomp).t9_sequence
